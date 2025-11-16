@@ -4,7 +4,9 @@ import { DataTable } from "./data-table";
 import { ColumnDef } from "@tanstack/react-table"
 import { columns, Member } from "./columns"
 import { ChartBarLabel } from "./chart-bar-label"
-
+import { ChartBarLabelCustom } from "./chart-bar-label-custom"
+import { ChartLineMultiple } from "./chart-line-multiple"
+ 
 import {
   Table,
   TableBody,
@@ -98,34 +100,64 @@ export default function Home() {
     }
   ];
 
+  const attendanceData = [
+    { Membership_Type: "Regular", Average_Attendance: 12, Predicted_Next_Month_Attendance: 13 },
+    { Membership_Type: "Premium", Average_Attendance: 23.33333333, Predicted_Next_Month_Attendance: 25.33333333 },
+    { Membership_Type: "VIP", Average_Attendance: 29, Predicted_Next_Month_Attendance: 30 },
+  ];
+
 
   return (
     <section className="container mx-auto py-10">
       <DataTable columns={columns} data={data} />
-      <h1 className="font-bold text-lg">Descriptive Analytics</h1>
+      <h1 className="font-bold text-lg" id="descriptive">Descriptive Analytics</h1>
       <Table className="mb-25">
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead className="w-[100px] text-center">Invoice</TableHead>
+            <TableHead className="text-center">Status</TableHead>
+            <TableHead className="text-center">Method</TableHead>
+            <TableHead className="text-center">Amount</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {metrics.map((metrics, index) => (
             <TableRow key={index}>
-              <TableCell className="font-medium">{metrics.category}</TableCell>
-              <TableCell>{metrics.metric}</TableCell>
-              <TableCell>{metrics.formula}</TableCell>
-              <TableCell className="text-right">{metrics.result}</TableCell>
+              <TableCell className="font-medium text-center">{metrics.category}</TableCell>
+              <TableCell className="text-center">{metrics.metric}</TableCell>
+              <TableCell className="text-center">{metrics.formula}</TableCell>
+              <TableCell className="text-center">{metrics.result}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-      <div className="w-full flex-row justify-center items-center">
+      <div className="w-full h-[50%] flex flex-row justify-center items-center gap-2 mb-40">
         <ChartBarLabel />
+        <ChartBarLabelCustom />
+      </div>
+      <h1 className="font-bold text-lg" id="descriptive">Predictive Analytics</h1>
+      <Table className="mb-25">
+        {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
+        <TableHeader className="">
+          <TableRow>
+            <TableHead className="w-[100px] text-center">Membership Type</TableHead>
+            <TableHead className="text-center">Average Attendance</TableHead>
+            <TableHead className="text-center">Predicted Next Month Attendance</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody className="">
+          {attendanceData.map((attendanceData, index) => (
+            <TableRow key={index}>
+              <TableCell className="font-medium text-center" >{attendanceData.Membership_Type}</TableCell>
+              <TableCell className="text-center">{attendanceData.Average_Attendance}</TableCell>
+              <TableCell className="text-center">{attendanceData.Predicted_Next_Month_Attendance}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <div className="w-full h-[30%] flex flex-row justify-center items-center mb-40">
+        <ChartLineMultiple />
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 "use client"
 
 import { TrendingUp } from "lucide-react"
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis, ResponsiveContainer } from "recharts"
 
 import {
   Card,
@@ -45,52 +45,60 @@ const chartData = [
 
 const chartConfig = {
   desktop: {
-    label: "Attendance ",
+    label: "Attendance",
     color: "var(--chart-3)",
   },
+  Attendance_Days: {
+    label: "Attendance"
+  }
 } satisfies ChartConfig
 
 export function ChartBarLabel() {
+
+
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Bar Chart - Label</CardTitle>
-        <CardDescription>Attendance per Member</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <BarChart
-            accessibilityLayer
-            data={chartData}
-            margin={{
-              top: 20,
-            }}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="Member_ID"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
-            />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
-            <Bar dataKey="Attendance_Days" fill="var(--color-desktop)" radius={8}>
-              <LabelList
-                position="top"
-                offset={12}
-                className="fill-foreground text-lg w-[50%]"
-                fontSize={20}
-                
+    <ResponsiveContainer width="50%" height="100%">
+      <Card>
+        <CardHeader>
+          <CardTitle>Bar Chart - Label</CardTitle>
+          <CardDescription>Attendance per Member</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={chartConfig}>
+            <BarChart
+              accessibilityLayer
+              data={chartData}
+              margin={{
+                top: 20,
+              }}
+            >
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey="Member_ID"
+                tickLine={false}
+                tickMargin={10}
+                axisLine={false}
+                tickFormatter={(value) => value.slice(0, 20)}
               />
-            </Bar>
-          </BarChart>
-        </ChartContainer>
-      </CardContent>
-      {/* <CardFooter className="flex-col items-start gap-2 text-sm">
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent hideLabel />}
+              />
+              <Bar dataKey="Attendance_Days" fill="var(--color-desktop)" radius={8}>
+                <LabelList
+                  position="top"
+                  offset={12}
+                  className="fill-foreground text-lg"
+                  fontSize={20}
+
+                />
+              </Bar>
+            </BarChart>
+
+          </ChartContainer>
+        </CardContent>
+
+        {/* <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 leading-none font-medium">
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
@@ -98,6 +106,7 @@ export function ChartBarLabel() {
           Showing total visitors for the last 6 months
         </div>
       </CardFooter> */}
-    </Card>
+      </Card>
+    </ResponsiveContainer>
   )
 }
