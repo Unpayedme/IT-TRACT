@@ -20,6 +20,7 @@ export type Member = {
     Monthly_Fee: number
 }
 
+
 export const columns: ColumnDef<Member>[] = [
     {
         accessorKey: "Member_ID",

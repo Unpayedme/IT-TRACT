@@ -22,7 +22,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
-import type { Member } from "./columns"
+import type {  Member } from "./columns"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -66,7 +66,7 @@ export function DataTable<TData extends Member, TValue>({
     })
 
     return (
-        <div>
+        <div className="mb-[25%]">
             <div className="flex items-center py-4">
                 <Input
                     placeholder="Filter names..."

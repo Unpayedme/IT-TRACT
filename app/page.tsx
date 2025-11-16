@@ -3,7 +3,17 @@ import Image from "next/image";
 import { DataTable } from "./data-table";
 import { ColumnDef } from "@tanstack/react-table"
 import { columns, Member } from "./columns"
+import { ChartBarLabel } from "./chart-bar-label"
 
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 
 export default function Home() {
@@ -31,9 +41,92 @@ export default function Home() {
     { Member_ID: "M020", Member_Name: "Sam Lim", Membership_Type: "VIP", Attendance_Days: 31, Trainer_Assigned: "Coach Mia", Monthly_Fee: 2500 }
   ];
 
+  const metrics = [
+    {
+      category: "Members",
+      metric: "Total Active Members",
+      formula: "20",
+      result: 20
+    },
+    {
+      category: "Attendance",
+      metric: "Highest Attendance",
+      formula: "31",
+      result: 31
+    },
+    {
+      category: "Attendance",
+      metric: "Lowest Attendance",
+      formula: "8",
+      result: 8
+    },
+    {
+      category: "Attendance",
+      metric: "Average Attendance",
+      formula: "19.65",
+      result: 20.2
+    },
+    {
+      category: "Finances",
+      metric: "Highest Monthly Fee",
+      formula: "2500",
+      result: "₱2,500"
+    },
+    {
+      category: "Finances",
+      metric: "Average Monthly Fee",
+      formula: "1705",
+      result: "₱1,745"
+    },
+    {
+      category: "Finances",
+      metric: "Total Monthly Revenue",
+      formula: "34100",
+      result: "₱34,000"
+    },
+    {
+      category: "Staff",
+      metric: "Most Active Trainer",
+      formula: "Use Pivot Table",
+      result: "Coach Mia"
+    },
+    {
+      category: "Membership",
+      metric: "Most Common Type",
+      formula: "Use Pivot Table or MODE.MULT()",
+      result: "Regular"
+    }
+  ];
+
+
   return (
     <section className="container mx-auto py-10">
       <DataTable columns={columns} data={data} />
+      <h1 className="font-bold text-lg">Descriptive Analytics</h1>
+      <Table className="mb-25">
+        {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">Invoice</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Method</TableHead>
+            <TableHead className="text-right">Amount</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {metrics.map((metrics, index) => (
+            <TableRow key={index}>
+              <TableCell className="font-medium">{metrics.category}</TableCell>
+              <TableCell>{metrics.metric}</TableCell>
+              <TableCell>{metrics.formula}</TableCell>
+              <TableCell className="text-right">{metrics.result}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <div className="w-full flex-row justify-center items-center">
+        <ChartBarLabel />
+      </div>
     </section>
   );
 }
