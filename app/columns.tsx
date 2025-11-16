@@ -23,7 +23,17 @@ export type Member = {
 export const columns: ColumnDef<Member>[] = [
     {
         accessorKey: "Member_ID",
-        header: "Member ID",
+         header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Member ID
+                    <ArrowUpDown className="h-4 w-4" />
+                </Button>
+            )
+        },
     },
     {
         accessorKey: "Member_Name",
