@@ -106,6 +106,33 @@ export default function Home() {
     { Membership_Type: "VIP", Average_Attendance: 29, Predicted_Next_Month_Attendance: 30 },
   ];
 
+  const recommendations = [
+  {
+    Issue_Goal: "Low Regular attendance",
+    Recommendation: "Launch “Bring-a-Friend” promo",
+    Expected_Result: "+10–15% Regular attendance",
+  },
+  {
+    Issue_Goal: "Coach Mia workload",
+    Recommendation: "Assign assistant trainer",
+    Expected_Result: "Balanced coaching workload",
+  },
+  {
+    Issue_Goal: "Encourage Premium upgrades",
+    Recommendation: "Offer free 1-week VIP trial",
+    Expected_Result: "2–3 new Premium members",
+  },
+  {
+    Issue_Goal: "Retain active VIPs",
+    Recommendation: "Implement loyalty rewards",
+    Expected_Result: "Higher retention",
+  },
+  {
+    Issue_Goal: "Improve satisfaction",
+    Recommendation: "Create feedback surveys",
+    Expected_Result: "Improved member feedback",
+  },
+];
 
   return (
     <section className="container mx-auto py-10">
@@ -159,6 +186,26 @@ export default function Home() {
       <div className="w-full h-[30%] flex flex-row justify-center items-center mb-40">
         <ChartLineMultiple />
       </div>
+      <h1 className="font-bold text-lg" id="descriptive">Prescriptive Analytics</h1>
+      <Table className="mb-25">
+        {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
+        <TableHeader className="">
+          <TableRow>
+            <TableHead className="w-[100px] text-center">Issue / Goal</TableHead>
+            <TableHead className="text-center">Recommendation</TableHead>
+            <TableHead className="text-center">Expected Result</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody className="">
+          {recommendations.map((recommendations, index) => (
+            <TableRow key={index}>
+              <TableCell className="font-medium text-center" >{recommendations.Issue_Goal}</TableCell>
+              <TableCell className="text-center">{recommendations.Recommendation}</TableCell>
+              <TableCell className="text-center">{recommendations.Expected_Result}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </section>
   );
 }
