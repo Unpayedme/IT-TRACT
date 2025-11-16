@@ -132,7 +132,7 @@ export default function Home() {
           ))}
         </TableBody>
       </Table>
-      <div className="w-full h-[50%] flex flex-row justify-center items-center gap-2 mb-40">
+      <div className="w-full h-[50%] flex flex-row justify-center items-center gap-2 mb-40 scroll-smooth">
         <ChartBarLabel />
         <ChartBarLabelCustom />
       </div>
